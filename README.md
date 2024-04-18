@@ -1,24 +1,33 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an example to produce different offenses with/without `spring`.
 
-Things you may want to cover:
+## With spring
 
-* Ruby version
+```console
+% bin/rubocop sample.rb
+Running via Spring preloader in process 86090
+Inspecting 1 file
+W
 
-* System dependencies
+Offenses:
 
-* Configuration
+sample.rb:5:5: C: Performance/CollectionLiteralInLoop: Avoid immutable Array literals in loops. It is better to extract it into a local variable or a constant.
+    [1, 2].exclude?(i)
+    ^^^^^^
+sample.rb:7:1: W: Lint/ShadowedException: Do not shadow rescued Exceptions.
+rescue ActiveRecord::RecordNotFound, ActiveRecord::ActiveRecordError, StandardError => e ...
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Database creation
+1 file inspected, 2 offenses detected
+```
 
-* Database initialization
+## Without spring
 
-* How to run the test suite
+```console
+% bundle exec rubocop sample.rb
+Inspecting 1 file
+.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1 file inspected, no offenses detected
+```
